@@ -7,12 +7,12 @@ class Doctype(showWarning: Boolean)(var attributes: Attribute*)(tags: HTMLTag*)
     extends HTMLTag:
 
   val tagSupport: TagSupport = TagSupport(
-      Chrome( Some("All")),
-      Edge(   Some("All")),
-      Firefox(Some("All")),
-      Opera(  Some("All")),
-      Safari( Some("All"))
-    )
+    Chrome( Some("All")),
+    Edge(   Some("All")),
+    Firefox(Some("All")),
+    Opera(  Some("All")),
+    Safari( Some("All"))
+  )
 
   def getTag: String =
     s"<!DOCTYPE ${attributes.map(_.getAttribute).mkString(" ")}>${tags.map(_.getTag).mkString}"

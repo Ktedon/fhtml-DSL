@@ -15,8 +15,6 @@ ThisBuild / scalacOptions ++=
     "-Ysafe-init", // experimental (I've seen it cause issues with circe)
   ) ++ Seq("-rewrite", "-indent") ++ Seq("-source", "future")
 
-libraryDependencies += "com.lihaoyi" %% "fansi" % "0.2.14"
-
 lazy val `fhtml` =
   project
     .in(file("."))
@@ -36,7 +34,8 @@ lazy val commonSettings = Seq(
 
 lazy val dependencies = Seq(
   libraryDependencies ++= Seq(
-    // main dependencies
+    "com.lihaoyi" %% "fansi" % "0.2.14",
+    "com.github.japgolly.scalacss" %% "core" % "1.0.0"
   ),
   libraryDependencies ++= Seq(
     org.scalatest.scalatest,

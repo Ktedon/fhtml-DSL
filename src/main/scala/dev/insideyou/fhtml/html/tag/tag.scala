@@ -2,8 +2,6 @@ package fhtml
 
 import fhtml.attributes.*
 
-val DefaultWarningValue = true
-
 object TagUtils:
   def getWarning(tagName: String)(attributes: Attribute*): Unit =
     println(fansi.Color.Green(s"$tagName tag info:"))
