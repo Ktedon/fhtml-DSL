@@ -7,9 +7,9 @@ object Main extends App:
   println("")
 
   val markup = 
-    Doctype(Html())(
+    Doctype.w(Html())(
       HtmlT(Accept :* "hello")(
-        Body(
+        Body.w(Spellcheck())(
           H1(Plaintext("The main element")),
           MainT(
             H1(Plaintext("Most Popular Browsers")),
@@ -31,6 +31,6 @@ object Main extends App:
       )
     )
 
-  println(markup.getTag)
+  // println(markup.getTag)
 
   
