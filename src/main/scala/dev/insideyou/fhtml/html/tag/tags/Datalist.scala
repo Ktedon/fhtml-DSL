@@ -7,11 +7,11 @@ class Datalist(showWarning: Boolean)(var attributes: Attribute*)(tags: HTMLTag*)
     extends HTMLTag:
 
   val tagSupport: TagSupport = TagSupport(
-    Chrome( Some("20.0")),
-    Edge(   Some("10.0")),
-    Firefox(Some("4.0")),
-    Opera(  Some("9.5")),
-    Safari( Some("12.1"))
+    Chrome( "20.0"),
+    Edge(   "10.0"),
+    Firefox("4.0"),
+    Opera(  "9.5"),
+    Safari( "12.1")
   )
 
   def getTag: String =

@@ -7,11 +7,11 @@ class Canvas(showWarning: Boolean)(var attributes: Attribute*)(tags: HTMLTag*)
     extends HTMLTag:
 
   val tagSupport: TagSupport = TagSupport(
-    Chrome( Some("2.0")),
-    Edge(   Some("9.0")),
-    Firefox(Some("2.0")),
-    Opera(  Some("3.1")),
-    Safari( Some("9.0"))
+    Chrome( "2.0"),
+    Edge(   "9.0"),
+    Firefox("2.0"),
+    Opera(  "3.1"),
+    Safari( "9.0")
   )
 
   def getTag: String =

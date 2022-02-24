@@ -13,611 +13,22 @@ abstract class Attribute(showWarning: Boolean):
 
 abstract class NoParamAttribute(showWarning: Boolean) extends Attribute(showWarning)
 abstract class ParamAttribute(showWarning: Boolean) extends Attribute(showWarning):
-	def ->(suffixValue: String): Attribute
+	// def ->(suffixValue: String): Attribute
 	def getSuffix: String
 
-case class HTML(showWarning: Boolean) extends NoParamAttribute(showWarning):
-	val supportedTags: Array[String] = Array("doctype")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map (
-				"doctype" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				)
-			)
-		)
 
-	def getAttribute: String = "html"
-	def this() = this(DefaultWarningValue)
-
-class Accept(showWarning: Boolean) extends ParamAttribute(showWarning):
-	private var suffix: String = ""
-	val supportedTags: Array[String] = Array("input")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map(
-				"input" -> (
-					Chrome( Some("8.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("4.0")),
-					Opera(  Some("15.0")),
-					Safari( Some("6.0"))
-				)
-			)
-		)
-
-	def ->(suffixValue: String) = 
-		suffix = suffixValue
-		this
-	def getAttribute:            String = s"accept=\"$suffix\""
-	def getSuffix:               String = suffix
-	def this() = this(DefaultWarningValue)
-
-class AcceptCharset(showWarning: Boolean) extends ParamAttribute(showWarning):
-	private var suffix: String = ""
-	val supportedTags: Array[String] = Array("form")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map(
-				"form" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				)
-			)
-		)
-
-	def ->(suffixValue: String): Attribute = 
-		suffix = suffixValue
-		this
-	def getAttribute:            String = s"accept-charset=\"$suffix\""
-	def getSuffix:               String = suffix
-	def this() = this(DefaultWarningValue)
-
-class Accesskey(showWarning: Boolean) extends ParamAttribute(showWarning):
-	private var suffix: String = ""
-	val supportedTags: Array[String] = Array()
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map(
-				"Global Attributes" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				)
-			)
-		)
-
-	def ->(suffixValue: String): Attribute = 
-		suffix = suffixValue
-		this
-	def getAttribute:            String = s"accesskey=\"$suffix\""
-	def getSuffix:               String = suffix
-	def this() = this(DefaultWarningValue)
-
-class Action(showWarning: Boolean) extends ParamAttribute(showWarning):
-	private var suffix: String = ""
-	val supportedTags: Array[String] = Array("form")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map (
-				"form" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				)
-			)
-		)
-
-	def ->(suffixValue: String): Attribute = 
-		suffix = suffixValue
-		this
-	def getAttribute:            String = s"action=\"$suffix\""
-	def getSuffix:               String = suffix
-	def this() = this(DefaultWarningValue)
-
-class Alt(showWarning: Boolean) extends ParamAttribute(showWarning):
-	private var suffix: String = ""
-	val supportedTags: Array[String] = Array("area", "img", "input")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport(
-			Map(
-				"area" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				),
-				"img" -> (
-					Chrome(Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				),
-				"input" -> (
-					Chrome(Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				)
-			)
-		)
-
-	def ->(suffixValue: String): Attribute = 
-		suffix = suffixValue
-		this
-	def getAttribute:            String = s"alt=\"$suffix\""
-	def getSuffix:               String = suffix
-	def this() = this(DefaultWarningValue)
-
-class Async(showWarning: Boolean) extends NoParamAttribute(showWarning):
-	val supportedTags: Array[String] = Array("script")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map (
-				"script" -> (
-					Chrome( Some("All")),
-					Edge(   Some("10.0")),
-					Firefox(Some("3.6")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				)
-			)
-		)
-
-	def getAttribute: String = "async"
-
-class Autocomplete(showWarning: Boolean) extends ParamAttribute(showWarning):
-	private var suffix: String = ""
-	val supportedTags: Array[String] = Array("form", "input")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport(
-			Map(
-				"form" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("4.0")),
-					Opera(  Some("15.0")),
-					Safari( Some("5.2"))
-				),
-				"input" -> (
-					Chrome(Some("17.0")),
-					Edge(   Some("5.0")),
-					Firefox(Some("4.0")),
-					Opera(  Some("9.6")),
-					Safari( Some("15.0"))
-				)
-			)
-		)
-
-	def ->(suffixValue: String): Attribute = 
-		suffix = suffixValue
-		this
-	def getAttribute:            String = s"autocomplete=\"$suffix\""
-	def getSuffix:               String = suffix
-	def this() = this(DefaultWarningValue)
-
-class Autofocus(showWarning: Boolean) extends NoParamAttribute(showWarning):
-	val supportedTags: Array[String] = Array("form", "input", "textarea")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map(
-				"form" -> (
-					Chrome( Some("5.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("4.0")),
-					Opera(  Some("9.6")),
-					Safari( Some("5.0"))
-				),
-				"input" -> (
-					Chrome( Some("5.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("4.0")),
-					Opera(  Some("9.6")),
-					Safari( Some("5.0"))
-				),
-				"textarea" -> (
-					Chrome( Some("All")),
-					Edge(   Some("10.0")),
-					Firefox(Some("4.0")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				)
-			)
-		)
-
-	def getAttribute: String = "autofocus"
-	def this() = this(DefaultWarningValue)
-
-class Autoplay(showWarning: Boolean) extends NoParamAttribute(showWarning):
-	val supportedTags: Array[String] = Array("audio", "video")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map (
-				"audio" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("10.5")),
-					Safari( Some("4.0"))
-				),
-				"video" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("10.5")),
-					Safari( Some("4.0"))
-				)
-			)
-		)
-
-	def getAttribute: String = "autoplay"
-	def this() = this(DefaultWarningValue)
-
-class Charset(showWarning: Boolean) extends ParamAttribute(showWarning):
-	private var suffix: String = ""
-	val supportedTags: Array[String] = Array("meta", "script")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map(
-				"meta" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				),
-				"script" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				)
-			)
-		)
-
-	def ->(suffixValue: String): Attribute = 
-		suffix = suffixValue
-		this
-	def getAttribute:            String = s"charset=\"$suffix\""
-	def getSuffix:               String = suffix
-	def this() = this(DefaultWarningValue)
-
-class Checked(showWarning: Boolean) extends NoParamAttribute(showWarning):
-	val supportedTags: Array[String] = Array("input")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map(
-				"input" -> (
-					Chrome( Some("1.0")),
-					Edge(   Some("2.0")),
-					Firefox(Some("1.0")),
-					Opera(  Some("1.0")),
-					Safari( Some("1.0"))
-				)
-			)
-		)
-
-	def getAttribute: String = "checked"
-	def this() = this(DefaultWarningValue)
-
-class Cite(showWarning: Boolean) extends ParamAttribute(showWarning):
-	private var suffix: String = ""
-	val supportedTags: Array[String] = Array("blockquote", "del", "ins", "q")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map(
-				"blockquote" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				),
-				"del" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				),
-				"ins" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				),
-				"q" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				)
-			)
-		)
-
-	def ->(suffixValue: String): Attribute = 
-		suffix = suffixValue
-		this
-	def getAttribute:            String = s"cite=\"$suffix\""
-	def getSuffix:               String = suffix
-	def this() = this(DefaultWarningValue)
-
-class Class(showWarning: Boolean) extends ParamAttribute(showWarning):
-	private var suffix: String = ""
-	val supportedTags: Array[String] = Array()
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map(
-				"Global Attributes" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				)
-			)
-		)
-
-	def ->(suffixValue: String): Attribute = 
-		suffix = suffixValue
-		this
-	def getAttribute:            String = s"class=\"$suffix\""
-	def getSuffix:               String = suffix
-	def this() = this(DefaultWarningValue)
-
-class Cols(showWarning: Boolean) extends ParamAttribute(showWarning):
-	private var suffix: String = ""
-	val supportedTags: Array[String] = Array("textarea")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map(
-				"textarea" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				)
-			)
-		)
-
-	def ->(suffixValue: String): Attribute = 
-		suffix = suffixValue
-		this
-	def getAttribute:            String = s"cols=\"$suffix\""
-	def getSuffix:               String = suffix
-	def this() = this(DefaultWarningValue)
-
-class Colspan(showWarning: Boolean) extends ParamAttribute(showWarning):
-	private var suffix: String = ""
-	val supportedTags: Array[String] = Array("td", "th")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map(
-				"td" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				),
-				"th" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				)
-			)
-		)
-
-	def ->(suffixValue: String): Attribute = 
-		suffix = suffixValue
-		this
-	def getAttribute:            String = s"colspan=\"$suffix\""
-	def getSuffix:               String = suffix
-	def this() = this(DefaultWarningValue)
-
-class Content(showWarning: Boolean) extends ParamAttribute(showWarning):
-	private var suffix: String = ""
-	val supportedTags: Array[String] = Array("meta")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map(
-				"td" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				)
-			)
-		)
-
-	def ->(suffixValue: String): Attribute = 
-		suffix = suffixValue
-		this
-	def getAttribute:            String = s"content=\"$suffix\""
-	def getSuffix:               String = suffix
-	def this() = this(DefaultWarningValue)
-
-class Contenteditable(showWarning: Boolean) extends NoParamAttribute(showWarning):
-	val supportedTags: Array[String] = Array()
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map(
-				"Global Attributes" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("6.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("10.1")),
-					Safari( Some("3.1"))
-				)
-			)
-		)
-
-	def getAttribute: String = "contenteditable"
-	def this() = this(DefaultWarningValue)
-
-class Controls(showWarning: Boolean) extends NoParamAttribute(showWarning):
-	val supportedTags: Array[String] = Array("audio", "video")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map(
-				"audio" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("10.5")),
-					Safari( Some("4.0"))
-				),
-				"video" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("10.5")),
-					Safari( Some("4.0"))
-				)
-			)
-		)
-
-	def getAttribute: String = "controls"
-	def this() = this(DefaultWarningValue)
-
-class Coords(showWarning: Boolean) extends ParamAttribute(showWarning):
-	private var suffix: String = ""
-	val supportedTags: Array[String] = Array("area")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map(
-				"area" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				)
-			)
-		)
-
-	def ->(suffixValue: String): Attribute = 
-		suffix = suffixValue
-		this
-	def getAttribute:            String = s"coords=\"$suffix\""
-	def getSuffix:               String = suffix
-	def this() = this(DefaultWarningValue)
-
-class Data(showWarning: Boolean) extends ParamAttribute(showWarning):
-	private var suffix: String = ""
-	val supportedTags: Array[String] = Array("object")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map(
-				"object" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				)
-			)
-		)
-
-	def ->(suffixValue: String): Attribute = 
-		suffix = suffixValue
-		this
-	def getAttribute:            String = s"data=\"$suffix\""
-	def getSuffix:               String = suffix
-	def this() = this(DefaultWarningValue)
-
-class `Data-`(nameAddition: String)(showWarning: Boolean) extends ParamAttribute(showWarning):
-	private var suffix: String = ""
-	val supportedTags: Array[String] = Array()
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map(
-				"Global Attribute" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("5.5")),
-					Firefox(Some("2.0")),
-					Opera(  Some("9.6")),
-					Safari( Some("3.1"))
-				)
-			)
-		)
-
-	def ->(suffixValue: String): Attribute = 
-		suffix = suffixValue
-		this
-	def getAttribute:            String = s"data-$nameAddition=\"$suffix\""
-	def getSuffix:               String = suffix
-	def this(nameAddition: String)() = this(nameAddition)(DefaultWarningValue)
-
-class Datatime(showWarning: Boolean) extends ParamAttribute(showWarning):
-	private var suffix: String = ""
-	val supportedTags: Array[String] = Array("del", "ins", "time")
-	val browserSupport: AttributeSupport = 
-		AttributeSupport( 
-			Map(
-				"del" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				),
-				"ins" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				),
-				"time" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
-				)
-			)
-		)
-
-	def ->(suffixValue: String): Attribute = 
-		suffix = suffixValue
-		this
-	def getAttribute:            String = s"datatime=\"$suffix\""
-	def getSuffix:               String = suffix
-	def this() = this(DefaultWarningValue)
 
 class Default(showWarning: Boolean) extends NoParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("track")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"track" -> (
-					Chrome( Some("18.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("31.0")),
-					Opera(  Some("15.0")),
-					Safari( Some("6.0"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -629,13 +40,13 @@ class Defer(showWarning: Boolean) extends NoParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("script")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"script" -> (
-					Chrome( Some("All")),
-					Edge(   Some("10.0")),
-					Firefox(Some("3.6")),
-					Opera(  Some("15.0")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "10.0"),
+					Firefox("3.6"),
+					Opera(  "15.0"),
+					Safari( "All")
 				)
 			)
 		)
@@ -648,13 +59,13 @@ class Dir(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array()
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"Global Attribute" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -671,20 +82,20 @@ class Dirname(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("input", "textarea")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"input" -> (
-					Chrome( Some("All")),
-					Edge(   None),
-					Firefox(None),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   ""),
+					Firefox(""),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"textarea" -> (
-					Chrome( Some("All")),
-					Edge(   None),
-					Firefox(None),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   ""),
+					Firefox(""),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -700,55 +111,55 @@ class Disabled(showWarning: Boolean) extends NoParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("button", "fieldset", "input", "optgroup", "option", "select", "textarea")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"button" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"fieldset" -> (
-					Chrome( Some("All")),
-					Edge(   None),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("7.0"))
+					Chrome( "All"),
+					Edge(   ""),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "7.0")
 				),
 				"input" -> (
-					Chrome( Some("1.0")),
-					Edge(   Some("6.0")),
-					Firefox(Some("1.0")),
-					Opera(  Some("1.0")),
-					Safari( Some("1.0"))
+					Chrome( "1.0"),
+					Edge(   "6.0"),
+					Firefox("1.0"),
+					Opera(  "1.0"),
+					Safari( "1.0")
 				),
 				"optgroup" -> (
-					Chrome( Some("1.0")),
-					Edge(   Some("8.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "1.0"),
+					Edge(   "8.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"option" -> (
-					Chrome( Some("1.0")),
-					Edge(   Some("8.0")),
-					Firefox(Some("1.0")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "1.0"),
+					Edge(   "8.0"),
+					Firefox("1.0"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"select" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"textarea" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -760,20 +171,20 @@ class Download(showWarning: Boolean) extends NoParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("a", "area")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"a" -> (
-					Chrome( Some("14.0")),
-					Edge(   Some("13.0")),
-					Firefox(Some("20.0")),
-					Opera(  Some("15.0")),
-					Safari( None)
+					Chrome( "14.0"),
+					Edge(   "13.0"),
+					Firefox("20.0"),
+					Opera(  "15.0"),
+					Safari( "")
 				),
 				"area" -> (
-					Chrome( Some("14.0")),
-					Edge(   None),
-					Firefox(Some("20.0")),
-					Opera(  Some("15.0")),
-					Safari( None)
+					Chrome( "14.0"),
+					Edge(   ""),
+					Firefox("20.0"),
+					Opera(  "15.0"),
+					Safari( "")
 				)
 			)
 		)
@@ -785,13 +196,13 @@ class Draggable(showWarning: Boolean) extends NoParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array()
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"Global Attribute" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("13.0")),
-					Safari( Some("6.0"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("3.5"),
+					Opera(  "13.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -804,13 +215,13 @@ class Enctype(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("form")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"form" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -828,20 +239,20 @@ class For(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("label", "output")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"label" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"output" -> (
-					Chrome( Some("10.0")),
-					Edge(   None),
-					Firefox(Some("4.0")),
-					Opera(  Some("11.0")),
-					Safari( Some("5.1"))
+					Chrome( "10.0"),
+					Edge(   ""),
+					Firefox("4.0"),
+					Opera(  "11.0"),
+					Safari( "5.1")
 				)
 			)
 		)
@@ -858,69 +269,69 @@ class Form(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("button", "fieldset", "input", "label", "meter", "object", "output", "select", "textarea")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport(
-			Map(
+			scala.collection.immutable.Map(
 				"button" -> (
-					Chrome( Some("10.0")),
-					Edge(   None),
-					Firefox(Some("4.0")),
-					Opera(  Some("9.5")),
-					Safari( Some("5.1"))
+					Chrome( "10.0"),
+					Edge(   ""),
+					Firefox("4.0"),
+					Opera(  "9.5"),
+					Safari( "5.1")
 				),
 				"fieldset" -> (
-					Chrome( None),
-					Edge(   None),
-					Firefox(None),
-					Opera(  None),
-					Safari( None)
+					Chrome( ""),
+					Edge(   ""),
+					Firefox(""),
+					Opera(  ""),
+					Safari( "")
 				),
 				"input" -> (
-					Chrome( Some("9.0")),
-					Edge(   None),
-					Firefox(Some("4.0")),
-					Opera(  Some("10.6")),
-					Safari( Some("5.1"))
+					Chrome( "9.0"),
+					Edge(   ""),
+					Firefox("4.0"),
+					Opera(  "10.6"),
+					Safari( "5.1")
 				),
 				"label" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"meter" -> (
-					Chrome( None),
-					Edge(   None),
-					Firefox(None),
-					Opera(  None),
-					Safari( None)
+					Chrome( ""),
+					Edge(   ""),
+					Firefox(""),
+					Opera(  ""),
+					Safari( "")
 				),
 				"object" -> (
-					Chrome( None),
-					Edge(   None),
-					Firefox(None),
-					Opera(  None),
-					Safari( None)
+					Chrome( ""),
+					Edge(   ""),
+					Firefox(""),
+					Opera(  ""),
+					Safari( "")
 				),
 				"output" -> (
-					Chrome( Some("All")),
-					Edge(   None),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   ""),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"select" -> (
-					Chrome( Some("All")),
-					Edge(   None),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   ""),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"textarea" -> (
-					Chrome( Some("All")),
-					Edge(   None),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   ""),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			) 
 		)
@@ -937,20 +348,20 @@ class Formaction(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("button", "input")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"button" -> (
-					Chrome( Some("9.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("4.0")),
-					Opera(  Some("10.6")),
-					Safari( Some("5.1"))
+					Chrome( "9.0"),
+					Edge(   "10.0"),
+					Firefox("4.0"),
+					Opera(  "10.6"),
+					Safari( "5.1")
 				),
 				"input" -> (
-					Chrome( Some("9.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("4.0")),
-					Opera(  Some("10.6")),
-					Safari( Some("5.1"))
+					Chrome( "9.0"),
+					Edge(   "10.0"),
+					Firefox("4.0"),
+					Opera(  "10.6"),
+					Safari( "5.1")
 				)
 			)
 		)
@@ -967,20 +378,20 @@ class Headers(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("td", "th")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"td" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"th" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -997,55 +408,55 @@ class Height(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("canvas", "embed", "iframe", "img", "input", "object", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"canvas" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("2.0")),
-					Opera(  Some("9.0")),
-					Safari( Some("3.1"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("2.0"),
+					Opera(  "9.0"),
+					Safari( "3.1")
 				),
 				"embed" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"iframe" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"img" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"input" -> (
-					Chrome( Some("1.0")),
-					Edge(   Some("All")),
-					Firefox(Some("16.0")),
-					Opera(  Some("1.0")),
-					Safari( Some("All"))
+					Chrome( "1.0"),
+					Edge(   "All"),
+					Firefox("16.0"),
+					Opera(  "1.0"),
+					Safari( "All")
 				),
 				"object" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -1062,13 +473,13 @@ class Hidden(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array()
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"Global Attribute" -> (
-					Chrome( Some("6.0")),
-					Edge(   Some("11.0")),
-					Firefox(Some("4.0")),
-					Opera(  Some("11.1")),
-					Safari( Some("5.1"))
+					Chrome( "6.0"),
+					Edge(   "11.0"),
+					Firefox("4.0"),
+					Opera(  "11.1"),
+					Safari( "5.1")
 				)
 			)
 		)
@@ -1085,13 +496,13 @@ class High(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("meter")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"meter" -> (
-					Chrome( Some("8.0")),
-					Edge(   None),
-					Firefox(Some("6.0")),
-					Opera(  Some("11.0")),
-					Safari( Some("6.0"))
+					Chrome( "8.0"),
+					Edge(   ""),
+					Firefox("6.0"),
+					Opera(  "11.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -1108,34 +519,34 @@ class Href(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("a", "area", "base", "link")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"a" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"area" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"base" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"link" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -1152,27 +563,27 @@ class Hreflang(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("a", "area", "link")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"a" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"area" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"link" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -1189,13 +600,13 @@ class HttpEquiv(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("meta")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"meta" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -1212,13 +623,13 @@ class Id(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array()
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"Global Attribute" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -1234,18 +645,18 @@ class Ismap(showWarning: Boolean) extends NoParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("img")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"img" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
 
-	def getAttribute: String = "ismap"
+	def getAttribute: String = "isscala.collection.immutable.Map"
 	def this() = this(DefaultWarningValue)
 
 class Kind(showWarning: Boolean) extends ParamAttribute(showWarning):
@@ -1253,13 +664,13 @@ class Kind(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("track")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"Global Attribute" -> (
-					Chrome( Some("18.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("31.0")),
-					Opera(  Some("15.0")),
-					Safari( Some("6.0"))
+					Chrome( "18.0"),
+					Edge(   "10.0"),
+					Firefox("31.0"),
+					Opera(  "15.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -1276,13 +687,13 @@ class Label(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("track")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"track" -> (
-					Chrome( Some("18.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("31.0")),
-					Opera(  Some("15.0")),
-					Safari( Some("6.0"))
+					Chrome( "18.0"),
+					Edge(   "10.0"),
+					Firefox("31.0"),
+					Opera(  "15.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -1299,13 +710,13 @@ class Lang(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array()
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"Global Attribute" -> (
-					Chrome( Some("18.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("31.0")),
-					Opera(  Some("15.0")),
-					Safari( Some("6.0"))
+					Chrome( "18.0"),
+					Edge(   "10.0"),
+					Firefox("31.0"),
+					Opera(  "15.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -1322,13 +733,13 @@ class List(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("input")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"input" -> (
-					Chrome( Some("20.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("4.0")),
-					Opera(  Some("9.6")),
-					Safari( None)
+					Chrome( "20.0"),
+					Edge(   "10.0"),
+					Firefox("4.0"),
+					Opera(  "9.6"),
+					Safari( "")
 				)
 			)
 		)
@@ -1344,20 +755,20 @@ class Loop(showWarning: Boolean) extends NoParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("10.5")),
-					Safari( Some("4.0"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("3.5"),
+					Opera(  "10.5"),
+					Safari( "4.0")
 				),
 				"video" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("11.0")),
-					Opera(  Some("10.5")),
-					Safari( Some("4.0"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("11.0"),
+					Opera(  "10.5"),
+					Safari( "4.0")
 				)
 			)
 		)
@@ -1370,13 +781,13 @@ class Low(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("meter")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"meter" -> (
-					Chrome( Some("8.0")),
-					Edge(   None),
-					Firefox(Some("6.0")),
-					Opera(  Some("11.0")),
-					Safari( Some("6.0"))
+					Chrome( "8.0"),
+					Edge(   ""),
+					Firefox("6.0"),
+					Opera(  "11.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -1393,27 +804,27 @@ class Max(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("input", "meter", "progress")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"input" -> (
-					Chrome( Some("5.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("16.0")),
-					Opera(  Some("10.6")),
-					Safari( Some("5.1"))
+					Chrome( "5.0"),
+					Edge(   "10.0"),
+					Firefox("16.0"),
+					Opera(  "10.6"),
+					Safari( "5.1")
 				),
 				"meter" -> (
-					Chrome( Some("8.0")),
-					Edge(   None),
-					Firefox(Some("6.0")),
-					Opera(  Some("11.0")),
-					Safari( Some("6.0"))
+					Chrome( "8.0"),
+					Edge(   ""),
+					Firefox("6.0"),
+					Opera(  "11.0"),
+					Safari( "6.0")
 				),
 				"progress" -> (
-					Chrome( Some("8.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("16.0")),
-					Opera(  Some("11.0")),
-					Safari( Some("6.0"))
+					Chrome( "8.0"),
+					Edge(   "10.0"),
+					Firefox("16.0"),
+					Opera(  "11.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -1430,20 +841,20 @@ class Maxlength(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("input", "textarea")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"input" -> (
-					Chrome( Some("1.0")),
-					Edge(   Some("2.0")),
-					Firefox(Some("1.0")),
-					Opera(  Some("1.0")),
-					Safari( Some("1.0"))
+					Chrome( "1.0"),
+					Edge(   "2.0"),
+					Firefox("1.0"),
+					Opera(  "1.0"),
+					Safari( "1.0")
 				),
 				"textarea" -> (
-					Chrome( Some("All")),
-					Edge(   Some("10.0")),
-					Firefox(Some("4.0")),
-					Opera(  Some("15.0")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "10.0"),
+					Firefox("4.0"),
+					Opera(  "15.0"),
+					Safari( "All")
 				)
 			)
 		)
@@ -1460,41 +871,41 @@ class Media(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("a", "area", "link", "source", "style")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"a" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"area" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"link" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"source" -> (
-					Chrome( None),
-					Edge(   None),
-					Firefox(None),
-					Opera(  None),
-					Safari( None)
+					Chrome( ""),
+					Edge(   ""),
+					Firefox(""),
+					Opera(  ""),
+					Safari( "")
 				),
 				"style" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -1511,13 +922,13 @@ class Method(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("form")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"form" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -1534,20 +945,20 @@ class Min(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("input", "meter")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"input" -> (
-					Chrome( Some("5.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("16.0")),
-					Opera(  Some("10.6")),
-					Safari( Some("5.1"))
+					Chrome( "5.0"),
+					Edge(   "10.0"),
+					Firefox("16.0"),
+					Opera(  "10.6"),
+					Safari( "5.1")
 				),
 				"meter" -> (
-					Chrome( Some("5.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("16.0")),
-					Opera(  Some("10.6")),
-					Safari( Some("5.1"))
+					Chrome( "5.0"),
+					Edge(   "10.0"),
+					Firefox("16.0"),
+					Opera(  "10.6"),
+					Safari( "5.1")
 				)
 			)
 		)
@@ -1564,20 +975,20 @@ class Multiple(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("input", "select")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"input" -> (
-					Chrome( Some("6.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("3.6")),
-					Opera(  Some("11.0")),
-					Safari( Some("5.0"))
+					Chrome( "6.0"),
+					Edge(   "10.0"),
+					Firefox("3.6"),
+					Opera(  "11.0"),
+					Safari( "5.0")
 				),
 				"select" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("ALl")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -1593,13 +1004,13 @@ class Muted(showWarning: Boolean) extends NoParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"video" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("11.0")),
-					Opera(  Some("10.5")),
-					Safari( Some("7.1"))
+					Chrome( "4.0"),
+					Edge(   "10.0"),
+					Firefox("11.0"),
+					Opera(  "10.5"),
+					Safari( "7.1")
 				)
 			)
 		)
@@ -1609,93 +1020,93 @@ class Muted(showWarning: Boolean) extends NoParamAttribute(showWarning):
 
 class Name(showWarning: Boolean) extends ParamAttribute(showWarning):
 	private var suffix: String = ""
-	val supportedTags: Array[String] = Array("button", "fieldset", "form", "iframe", "input", "map", "meta", "object", "output", "param", "select", "textarea")
+	val supportedTags: Array[String] = Array("button", "fieldset", "form", "iframe", "input", "scala.collection.immutable.Map", "meta", "object", "output", "param", "select", "textarea")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"button" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"fieldset" -> (
-					Chrome( Some("All")),
-					Edge(   None),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   ""),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"form" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"iframe" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"input" -> (
-					Chrome( Some("1.0")),
-					Edge(   Some("2.0")),
-					Firefox(Some("1.0")),
-					Opera(  Some("1.0")),
-					Safari( Some("1.0"))
+					Chrome( "1.0"),
+					Edge(   "2.0"),
+					Firefox("1.0"),
+					Opera(  "1.0"),
+					Safari( "1.0")
 				),
-				"map" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+				"scala.collection.immutable.Map" -> (
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"meta" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"object" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"output" -> (
-					Chrome( Some("10.0")),
-					Edge(   None),
-					Firefox(Some("4.0")),
-					Opera(  Some("11.0")),
-					Safari( Some("5.1"))
+					Chrome( "10.0"),
+					Edge(   ""),
+					Firefox("4.0"),
+					Opera(  "11.0"),
+					Safari( "5.1")
 				),
 				"param" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"select" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"textarea" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -1711,13 +1122,13 @@ class Novalidate(showWarning: Boolean) extends NoParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"video" -> (
-					Chrome( Some("10.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("4.0")),
-					Opera(  Some("10.6")),
-					Safari( None)
+					Chrome( "10.0"),
+					Edge(   "10.0"),
+					Firefox("4.0"),
+					Opera(  "10.6"),
+					Safari( "")
 				)
 			)
 		)
@@ -1730,41 +1141,41 @@ class Onabort(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "embed", "img", "object", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"embed" -> (
-					Chrome( Some("All")),
-					Edge(   None),
-					Firefox(Some("ALl")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   ""),
+					Firefox("ALl"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"img" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("ALl")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"object" -> (
-					Chrome( Some("All")),
-					Edge(   None),
-					Firefox(Some("ALl")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   ""),
+					Firefox("ALl"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("ALl")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("ALl"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 			)
 		)
@@ -1781,13 +1192,13 @@ class Onafterprint(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("body")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"body" -> (
-					Chrome( Some("63")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  None),
-					Safari( None)
+					Chrome( "63"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  ""),
+					Safari( "")
 				)
 			)
 		)
@@ -1804,13 +1215,13 @@ class Onbeforeprint(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("body")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"body" -> (
-					Chrome( Some("63")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  None),
-					Safari( None)
+					Chrome( "63"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  ""),
+					Safari( "")
 				)
 			)
 		)
@@ -1827,13 +1238,13 @@ class Onbeforeunload(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("body")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"body" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("15.0")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "15.0"),
+					Safari( "All")
 				)
 			)
 		)
@@ -1850,13 +1261,13 @@ class Onblur(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -1873,34 +1284,34 @@ class Oncanplay(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "embed", "object", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"embed" -> (
-					Chrome( None),
-					Edge(   None),
-					Firefox(None),
-					Opera(  None),
-					Safari( None)
+					Chrome( ""),
+					Edge(   ""),
+					Firefox(""),
+					Opera(  ""),
+					Safari( "")
 				),
 				"object" -> (
-					Chrome( None),
-					Edge(   None),
-					Firefox(None),
-					Opera(  None),
-					Safari( None)
+					Chrome( ""),
+					Edge(   ""),
+					Firefox(""),
+					Opera(  ""),
+					Safari( "")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -1917,20 +1328,20 @@ class Oncanplaythrough(showWarning: Boolean) extends ParamAttribute(showWarning)
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -1947,13 +1358,13 @@ class Onchange(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -1970,13 +1381,13 @@ class Onclick(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -1993,13 +1404,13 @@ class Oncontextmenu(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2016,13 +1427,13 @@ class Oncopy(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2039,13 +1450,13 @@ class Oncuechange(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("track")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"track" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(None),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox(""),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2062,13 +1473,13 @@ class Oncut(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2085,13 +1496,13 @@ class Ondblclick(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2108,13 +1519,13 @@ class Ondrag(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("12.0")),
-					Safari( Some("6.0"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("3.5"),
+					Opera(  "12.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -2131,13 +1542,13 @@ class Ondragend(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("12.0")),
-					Safari( Some("6.0"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("3.5"),
+					Opera(  "12.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -2154,13 +1565,13 @@ class Ondragenter(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("12.0")),
-					Safari( Some("6.0"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("3.5"),
+					Opera(  "12.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -2177,13 +1588,13 @@ class Ondragleave(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("12.0")),
-					Safari( Some("6.0"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("3.5"),
+					Opera(  "12.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -2200,13 +1611,13 @@ class Ondragover(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("12.0")),
-					Safari( Some("6.0"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("3.5"),
+					Opera(  "12.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -2223,13 +1634,13 @@ class Ondragstart(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("12.0")),
-					Safari( Some("6.0"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("3.5"),
+					Opera(  "12.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -2246,13 +1657,13 @@ class Ondrop(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("12.0")),
-					Safari( Some("6.0"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("3.5"),
+					Opera(  "12.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -2269,20 +1680,20 @@ class Ondurationchange(showWarning: Boolean) extends ParamAttribute(showWarning)
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2299,20 +1710,20 @@ class Onemptied(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("Unknown")),
-					Edge(   Some("Unknown")),
-					Firefox(Some("Unknown")),
-					Opera(  Some("Unknown")),
-					Safari( Some("Unknown"))
+					Chrome( "Unknown"),
+					Edge(   "Unknown"),
+					Firefox("Unknown"),
+					Opera(  "Unknown"),
+					Safari( "Unknown")
 				),
 				"video" -> (
-					Chrome( Some("Unknown")),
-					Edge(   Some("Unknown")),
-					Firefox(Some("Unknown")),
-					Opera(  Some("Unknown")),
-					Safari( Some("Unknown"))
+					Chrome( "Unknown"),
+					Edge(   "Unknown"),
+					Firefox("Unknown"),
+					Opera(  "Unknown"),
+					Safari( "Unknown")
 				)
 			)
 		)
@@ -2329,20 +1740,20 @@ class Onended(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2359,62 +1770,62 @@ class Onerror(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "body", "embed", "img", "link", "object", "script", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"body" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"embed" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"img" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"link" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"object" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"script" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 			)
 		)
@@ -2431,13 +1842,13 @@ class Onfocus(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2454,13 +1865,13 @@ class Onhashchange(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("5.0")),
-					Edge(   Some("8.0")),
-					Firefox(Some("3.6")),
-					Opera(  Some("10.6")),
-					Safari( Some("5.0"))
+					Chrome( "5.0"),
+					Edge(   "8.0"),
+					Firefox("3.6"),
+					Opera(  "10.6"),
+					Safari( "5.0")
 				)
 			)
 		)
@@ -2477,13 +1888,13 @@ class Oninput(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2500,13 +1911,13 @@ class Oninvalidate(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("10.0")),
-					Firefox(Some("All")),
-					Opera(  None),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "10.0"),
+					Firefox("All"),
+					Opera(  ""),
+					Safari( "All")
 				)
 			)
 		)
@@ -2523,13 +1934,13 @@ class Onkeydown(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2546,13 +1957,13 @@ class Onkeypress(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2569,55 +1980,55 @@ class Onkeyup(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("body", "iframe", "img", "input", "link", "script", "style")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"body" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"iframe" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"img" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"input" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"link" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"script" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"style" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2634,20 +2045,20 @@ class Onloadeddata(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2664,20 +2075,20 @@ class Onloadedmetadata(showWarning: Boolean) extends ParamAttribute(showWarning)
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2694,20 +2105,20 @@ class Onloadstart(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2724,13 +2135,13 @@ class Onmousedown(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2747,13 +2158,13 @@ class Onmousemove(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2770,13 +2181,13 @@ class Onmouseout(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2793,13 +2204,13 @@ class Onmouseover(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2816,13 +2227,13 @@ class Onmouseup(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2839,13 +2250,13 @@ class Onoffline(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("body")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( None),
-					Edge(   Some("8.0")),
-					Firefox(Some("3.0")),
-					Opera(  None),
-					Safari( None)
+					Chrome( ""),
+					Edge(   "8.0"),
+					Firefox("3.0"),
+					Opera(  ""),
+					Safari( "")
 				)
 			)
 		)
@@ -2862,13 +2273,13 @@ class Ononline(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("body")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( None),
-					Edge(   Some("8.0")),
-					Firefox(Some("3.0")),
-					Opera(  None),
-					Safari( None)
+					Chrome( ""),
+					Edge(   "8.0"),
+					Firefox("3.0"),
+					Opera(  ""),
+					Safari( "")
 				)
 			)
 		)
@@ -2885,13 +2296,13 @@ class Onpagehide(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("body")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"body" -> (
-					Chrome( Some("Unknown")),
-					Edge(   Some("Unknown")),
-					Firefox(Some("Unknown")),
-					Opera(  Some("Unknown")),
-					Safari( Some("Unknown"))
+					Chrome( "Unknown"),
+					Edge(   "Unknown"),
+					Firefox("Unknown"),
+					Opera(  "Unknown"),
+					Safari( "Unknown")
 				)
 			)
 		)
@@ -2908,13 +2319,13 @@ class Onpageshow(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("body")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("11.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("5.0"))
+					Chrome( "All"),
+					Edge(   "11.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "5.0")
 				)
 			)
 		)
@@ -2931,13 +2342,13 @@ class Onpaste(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2954,20 +2365,20 @@ class Onpause(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -2984,20 +2395,20 @@ class Onplay(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3014,20 +2425,20 @@ class Onplaying(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3044,13 +2455,13 @@ class Onpopstate(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"body" -> (
-					Chrome( Some("Unknown")),
-					Edge(   Some("Unknown")),
-					Firefox(Some("Unknown")),
-					Opera(  Some("Unknown")),
-					Safari( Some("Unknown"))
+					Chrome( "Unknown"),
+					Edge(   "Unknown"),
+					Firefox("Unknown"),
+					Opera(  "Unknown"),
+					Safari( "Unknown")
 				)
 			)
 		)
@@ -3067,20 +2478,20 @@ class Onprogress(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3097,20 +2508,20 @@ class Onratechange(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3127,13 +2538,13 @@ class Onreset(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("form")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"form" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3150,13 +2561,13 @@ class Onresize(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("body")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"body" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3173,13 +2584,13 @@ class Onscroll(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3196,13 +2607,13 @@ class Onsearch(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   None),
-					Firefox(None),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   ""),
+					Firefox(""),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3219,20 +2630,20 @@ class Onseeked(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3249,20 +2660,20 @@ class Onseeking(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3279,13 +2690,13 @@ class Onselect(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3302,20 +2713,20 @@ class Onstalled(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3332,13 +2743,13 @@ class Onstorage(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("body")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"body" -> (
-					Chrome( Some("Unknown")),
-					Edge(   Some("Unknown")),
-					Firefox(Some("Unknown")),
-					Opera(  Some("Unknown")),
-					Safari( Some("Unknown"))
+					Chrome( "Unknown"),
+					Edge(   "Unknown"),
+					Firefox("Unknown"),
+					Opera(  "Unknown"),
+					Safari( "Unknown")
 				)
 			)
 		)
@@ -3355,13 +2766,13 @@ class Onsubmit(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("form")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"form" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3378,20 +2789,20 @@ class Onsuspend(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3408,20 +2819,20 @@ class Ontimeupdate(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3438,13 +2849,13 @@ class Ontoggle(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("details")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"details" -> (
-					Chrome( Some("12.0")),
-					Edge(   None),
-					Firefox(None),
-					Opera(  Some("15.0")),
-					Safari( Some("6.0"))
+					Chrome( "12.0"),
+					Edge(   ""),
+					Firefox(""),
+					Opera(  "15.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -3461,13 +2872,13 @@ class Onunload(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("details")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"details" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3484,20 +2895,20 @@ class Onvolumechange(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3514,20 +2925,20 @@ class Onwaiting(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("9.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "9.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3544,13 +2955,13 @@ class Onwheel(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("VISIBLES")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"All visible elements" -> (
-					Chrome( Some("31.0")),
-					Edge(   None),
-					Firefox(Some("17.0")),
-					Opera(  Some("18.0")),
-					Safari( None)
+					Chrome( "31.0"),
+					Edge(   ""),
+					Firefox("17.0"),
+					Opera(  "18.0"),
+					Safari( "")
 				)
 			)
 		)
@@ -3566,13 +2977,13 @@ class Open(showWarning: Boolean) extends NoParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("details")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"details" -> (
-					Chrome( Some("12.0")),
-					Edge(   None),
-					Firefox(None),
-					Opera(  Some("15.0")),
-					Safari( Some("6.0"))
+					Chrome( "12.0"),
+					Edge(   ""),
+					Firefox(""),
+					Opera(  "15.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -3585,13 +2996,13 @@ class Optimum(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("meter")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"meter" -> (
-					Chrome( Some("8.0")),
-					Edge(   None),
-					Firefox(Some("6.0")),
-					Opera(  Some("11.0")),
-					Safari( Some("6.0"))
+					Chrome( "8.0"),
+					Edge(   ""),
+					Firefox("6.0"),
+					Opera(  "11.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -3608,13 +3019,13 @@ class Pattern(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("input")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"input" -> (
-					Chrome( Some("5.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("4.0")),
-					Opera(  Some("9.6")),
-					Safari( None)
+					Chrome( "5.0"),
+					Edge(   "10.0"),
+					Firefox("4.0"),
+					Opera(  "9.6"),
+					Safari( "")
 				)
 			)
 		)
@@ -3631,20 +3042,20 @@ class Placeholder(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("input", "textarea")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"input" -> (
-					Chrome( Some("10.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("4.0")),
-					Opera(  Some("11.0")),
-					Safari( Some("5.0"))
+					Chrome( "10.0"),
+					Edge(   "10.0"),
+					Firefox("4.0"),
+					Opera(  "11.0"),
+					Safari( "5.0")
 				),
 				"input" -> (
-					Chrome( Some("All")),
-					Edge(   Some("10.0")),
-					Firefox(Some("4.0")),
-					Opera(  Some("11.5")),
-					Safari( Some("5.0"))
+					Chrome( "All"),
+					Edge(   "10.0"),
+					Firefox("4.0"),
+					Opera(  "11.5"),
+					Safari( "5.0")
 				)
 			)
 		)
@@ -3661,13 +3072,13 @@ class Poster(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"video" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("10.5")),
-					Safari( Some("4.0"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("3.5"),
+					Opera(  "10.5"),
+					Safari( "4.0")
 				)
 			)
 		)
@@ -3684,20 +3095,20 @@ class Preload(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("4.0")),
-					Opera(  Some("10.5")),
-					Safari( Some("4.0"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("4.0"),
+					Opera(  "10.5"),
+					Safari( "4.0")
 				),
 				"video" -> (
-					Chrome( Some("4.0")),
-					Edge(   None),
-					Firefox(Some("4.0")),
-					Opera(  Some("10.5")),
-					Safari( Some("4.0"))
+					Chrome( "4.0"),
+					Edge(   ""),
+					Firefox("4.0"),
+					Opera(  "10.5"),
+					Safari( "4.0")
 				)
 			)
 		)
@@ -3713,20 +3124,20 @@ class Readonly(showWarning: Boolean) extends NoParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("input", "textarea")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"input" -> (
-					Chrome( Some("1.0")),
-					Edge(   Some("6.0")),
-					Firefox(Some("1.0")),
-					Opera(  Some("1.0")),
-					Safari( Some("1.0"))
+					Chrome( "1.0"),
+					Edge(   "6.0"),
+					Firefox("1.0"),
+					Opera(  "1.0"),
+					Safari( "1.0")
 				),
 				"video" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3739,34 +3150,34 @@ class Rel(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("a", "area", "form", "link")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"a" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"area" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"form" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"link" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3782,27 +3193,27 @@ class Required(showWarning: Boolean) extends NoParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("a", "area", "form", "link")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"input" -> (
-					Chrome( Some("5.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("4.0")),
-					Opera(  Some("9.6")),
-					Safari( None)
+					Chrome( "5.0"),
+					Edge(   "10.0"),
+					Firefox("4.0"),
+					Opera(  "9.6"),
+					Safari( "")
 				),
 				"select" -> (
-					Chrome( Some("All")),
-					Edge(   Some("10.0")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( None)
+					Chrome( "All"),
+					Edge(   "10.0"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "")
 				),
 				"textarea" -> (
-					Chrome( Some("5.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("4.0")),
-					Opera(  Some("All")),
-					Safari( None)
+					Chrome( "5.0"),
+					Edge(   "10.0"),
+					Firefox("4.0"),
+					Opera(  "All"),
+					Safari( "")
 				)
 			)
 		)
@@ -3814,13 +3225,13 @@ class Reversed(showWarning: Boolean) extends NoParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("ol")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"ol" -> (
-					Chrome( Some("18.0")),
-					Edge(   None),
-					Firefox(Some("18.0")),
-					Opera(  Some("All")),
-					Safari( Some("5.2"))
+					Chrome( "18.0"),
+					Edge(   ""),
+					Firefox("18.0"),
+					Opera(  "All"),
+					Safari( "5.2")
 				)
 			)
 		)
@@ -3832,20 +3243,20 @@ class Rowspan(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("td", "th")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"td" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"th" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3861,13 +3272,13 @@ class Sandbox(showWarning: Boolean) extends NoParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("iframe")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"iframe" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("17.0")),
-					Opera(  Some("15.0")),
-					Safari( Some("5.0"))
+					Chrome( "4.0"),
+					Edge(   "10.0"),
+					Firefox("17.0"),
+					Opera(  "15.0"),
+					Safari( "5.0")
 				)
 			)
 		)
@@ -3880,13 +3291,13 @@ class Scope(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("th")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"th" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3902,13 +3313,13 @@ class Selected(showWarning: Boolean) extends NoParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("option")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"option" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3921,13 +3332,13 @@ class Shape(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("area")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"area" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3944,20 +3355,20 @@ class Size(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("input", "select")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"input" -> (
-					Chrome( Some("1.0")),
-					Edge(   Some("2.0")),
-					Firefox(Some("1.0")),
-					Opera(  Some("1.0")),
-					Safari( Some("1.0"))
+					Chrome( "1.0"),
+					Edge(   "2.0"),
+					Firefox("1.0"),
+					Opera(  "1.0"),
+					Safari( "1.0")
 				),
 				"select" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -3974,13 +3385,13 @@ class Sizes(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("link")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"link" -> (
-					Chrome( None),
-					Edge(   None),
-					Firefox(None),
-					Opera(  None),
-					Safari( None)
+					Chrome( ""),
+					Edge(   ""),
+					Firefox(""),
+					Opera(  ""),
+					Safari( "")
 				)
 			)
 		)
@@ -3997,20 +3408,20 @@ class Span(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("col", "colgroup")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"col" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"colgroup" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -4027,13 +3438,13 @@ class Spellcheck(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array()
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"Global Attributes" -> (
-					Chrome( Some("9.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("2.0")),
-					Opera(  Some("10.5")),
-					Safari( Some("5.1"))
+					Chrome( "9.0"),
+					Edge(   "10.0"),
+					Firefox("2.0"),
+					Opera(  "10.5"),
+					Safari( "5.1")
 				)
 			)
 		)
@@ -4050,69 +3461,69 @@ class Src(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("audio", "embed", "iframe", "img", "input", "script", "source", "track", "video")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"audio" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("10.5")),
-					Safari( Some("4.0"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("3.5"),
+					Opera(  "10.5"),
+					Safari( "4.0")
 				),
 				"embed" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"iframe" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"img" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"input" -> (
-					Chrome( Some("1.0")),
-					Edge(   Some("2.0")),
-					Firefox(Some("1.0")),
-					Opera(  Some("1.0")),
-					Safari( Some("1.0"))
+					Chrome( "1.0"),
+					Edge(   "2.0"),
+					Firefox("1.0"),
+					Opera(  "1.0"),
+					Safari( "1.0")
 				),
 				"script" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"source" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("10.5")),
-					Safari( Some("4.0"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("3.5"),
+					Opera(  "10.5"),
+					Safari( "4.0")
 				),
 				"track" -> (
-					Chrome( Some("18.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("31.0")),
-					Opera(  Some("15.0")),
-					Safari( Some("6.0"))
+					Chrome( "18.0"),
+					Edge(   "10.0"),
+					Firefox("31.0"),
+					Opera(  "15.0"),
+					Safari( "6.0")
 				),
 				"video" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("10.5")),
-					Safari( Some("4.0"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("3.5"),
+					Opera(  "10.5"),
+					Safari( "4.0")
 				)
 			)
 		)
@@ -4129,13 +3540,13 @@ class Srcdoc(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("iframe")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"iframe" -> (
-					Chrome( Some("20.0")),
-					Edge(   None),
-					Firefox(Some("25.0")),
-					Opera(  Some("15.0")),
-					Safari( Some("6.0"))
+					Chrome( "20.0"),
+					Edge(   ""),
+					Firefox("25.0"),
+					Opera(  "15.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -4152,13 +3563,13 @@ class Srclang(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("track")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"track" -> (
-					Chrome( Some("18.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("31.0")),
-					Opera(  Some("15.0")),
-					Safari( Some("6.0"))
+					Chrome( "18.0"),
+					Edge(   "10.0"),
+					Firefox("31.0"),
+					Opera(  "15.0"),
+					Safari( "6.0")
 				)
 			)
 		)
@@ -4175,20 +3586,20 @@ class Srcset(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("img", "source")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"img" -> (
-					Chrome( Some("38.0")),
-					Edge(   Some("13.0")),
-					Firefox(Some("38.0")),
-					Opera(  Some("25.0")),
-					Safari( Some("9.1"))
+					Chrome( "38.0"),
+					Edge(   "13.0"),
+					Firefox("38.0"),
+					Opera(  "25.0"),
+					Safari( "9.1")
 				),
 				"source" -> (
-					Chrome( Some("38.0")),
-					Edge(   Some("13.0")),
-					Firefox(Some("38.0")),
-					Opera(  Some("25.0")),
-					Safari( Some("9.1"))
+					Chrome( "38.0"),
+					Edge(   "13.0"),
+					Firefox("38.0"),
+					Opera(  "25.0"),
+					Safari( "9.1")
 				)
 			)
 		)
@@ -4205,13 +3616,13 @@ class Start(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("ol")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"ol" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -4228,13 +3639,13 @@ class Step(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("input")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"input" -> (
-					Chrome( Some("6.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("16.0")),
-					Opera(  Some("10.6")),
-					Safari( Some("5.0"))
+					Chrome( "6.0"),
+					Edge(   "10.0"),
+					Firefox("16.0"),
+					Opera(  "10.6"),
+					Safari( "5.0")
 				)
 			)
 		)
@@ -4251,13 +3662,13 @@ class Style(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array()
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"Global Attributes" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -4274,13 +3685,13 @@ class Tabindex(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array()
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"Global Attributes" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -4297,34 +3708,34 @@ class Target(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("a", "area", "base", "form")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"a" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"area" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"base" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"form" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -4341,13 +3752,13 @@ class TitleAttr(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array()
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"Global Attributes" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -4364,13 +3775,13 @@ class Translate(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array()
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"Global Attributes" -> (
-					Chrome( None),
-					Edge(   None),
-					Firefox(None),
-					Opera(  None),
-					Safari( None)
+					Chrome( ""),
+					Edge(   ""),
+					Firefox(""),
+					Opera(  ""),
+					Safari( "")
 				)
 			)
 		)
@@ -4387,69 +3798,69 @@ class Type(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("a", "button", "embed", "input", "link", "menu", "object", "script", "source", "style")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"a" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"embed" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"button" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"input" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"link" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"object" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"style" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"script" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"source" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("3.5")),
-					Opera(  Some("10.5")),
-					Safari( Some("4.0"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("3.5"),
+					Opera(  "10.5"),
+					Safari( "4.0")
 				)
 			)
 		)
@@ -4466,20 +3877,20 @@ class Usemap(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("img", "object")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"img" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"object" -> (
-					Chrome( None),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  None),
-					Safari( None)
+					Chrome( ""),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  ""),
+					Safari( "")
 				)
 			)
 		)
@@ -4487,7 +3898,7 @@ class Usemap(showWarning: Boolean) extends ParamAttribute(showWarning):
 	def ->(suffixValue: String): Attribute = 
 		suffix = suffixValue
 		this
-	def getAttribute:            String = s"usemap=\"$suffix\""
+	def getAttribute:            String = s"usescala.collection.immutable.Map=\"$suffix\""
 	def getSuffix:               String = suffix
 	def this() = this(DefaultWarningValue)
 
@@ -4496,55 +3907,55 @@ class Value(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("button", "input", "li", "meter", "option", "progress", "param")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"button" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"input" -> (
-					Chrome( Some("1.0")),
-					Edge(   Some("2.0")),
-					Firefox(Some("1.0")),
-					Opera(  Some("1.0")),
-					Safari( Some("1.0"))
+					Chrome( "1.0"),
+					Edge(   "2.0"),
+					Firefox("1.0"),
+					Opera(  "1.0"),
+					Safari( "1.0")
 				),
 				"li" -> (
-					Chrome( Some("1.0")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("1.0")),
-					Safari( Some("1.0"))
+					Chrome( "1.0"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "1.0"),
+					Safari( "1.0")
 				),
 				"meter" -> (
-					Chrome( Some("8.0")),
-					Edge(   Some("13.0")),
-					Firefox(Some("6.0")),
-					Opera(  Some("11.0")),
-					Safari( Some("61.0"))
+					Chrome( "8.0"),
+					Edge(   "13.0"),
+					Firefox("6.0"),
+					Opera(  "11.0"),
+					Safari( "61.0")
 				),
 				"option" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"progress" -> (
-					Chrome( Some("8.0")),
-					Edge(   Some("10.0")),
-					Firefox(Some("16.0")),
-					Opera(  Some("11.0")),
-					Safari( Some("6.0"))
+					Chrome( "8.0"),
+					Edge(   "10.0"),
+					Firefox("16.0"),
+					Opera(  "11.0"),
+					Safari( "6.0")
 				),
 				"param" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -4561,55 +3972,55 @@ class Width(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("canvas", "embed", "iframe", "img", "input", "object", "width")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"canvas" -> (
-					Chrome( Some("4.0")),
-					Edge(   Some("9.0")),
-					Firefox(Some("2.0")),
-					Opera(  Some("9.0")),
-					Safari( Some("3.1"))
+					Chrome( "4.0"),
+					Edge(   "9.0"),
+					Firefox("2.0"),
+					Opera(  "9.0"),
+					Safari( "3.1")
 				),
 				"embed" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"iframe" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"img" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"input" -> (
-					Chrome( Some("1.0")),
-					Edge(   Some("All")),
-					Firefox(Some("16.0")),
-					Opera(  Some("1.0")),
-					Safari( Some("All"))
+					Chrome( "1.0"),
+					Edge(   "All"),
+					Firefox("16.0"),
+					Opera(  "1.0"),
+					Safari( "All")
 				),
 				"object" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				),
 				"width" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)
@@ -4626,13 +4037,13 @@ class Wrap(showWarning: Boolean) extends ParamAttribute(showWarning):
 	val supportedTags: Array[String] = Array("textarea")
 	val browserSupport: AttributeSupport = 
 		AttributeSupport( 
-			Map(
+			scala.collection.immutable.Map(
 				"textarea" -> (
-					Chrome( Some("All")),
-					Edge(   Some("All")),
-					Firefox(Some("All")),
-					Opera(  Some("All")),
-					Safari( Some("All"))
+					Chrome( "All"),
+					Edge(   "All"),
+					Firefox("All"),
+					Opera(  "All"),
+					Safari( "All")
 				)
 			)
 		)

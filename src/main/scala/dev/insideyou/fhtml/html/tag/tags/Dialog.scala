@@ -7,11 +7,11 @@ class Dialog(showWarning: Boolean)(var attributes: Attribute*)(tags: HTMLTag*)
     extends HTMLTag:
 
   val tagSupport: TagSupport = TagSupport(
-    Chrome( Some("37.0")),
-    Edge(   Some("79.0")),
-    Firefox(None),
-    Opera(  Some("24.0")),
-    Safari( None)
+    Chrome( "37.0"),
+    Edge(   "79.0"),
+    Firefox(""),
+    Opera(  "24.0"),
+    Safari( "")
   )
 
   def getTag: String =

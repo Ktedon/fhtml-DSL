@@ -6,11 +6,11 @@ import fhtml.attributes.*
 class Audio(showWarning: Boolean)(var attributes: Attribute*) extends HTMLTag:
 
   val tagSupport: TagSupport = TagSupport(
-      Chrome( Some("4.0")),
-      Edge(   Some("9.0")),
-      Firefox(Some("3.5")),
-      Opera(  Some("4.0")),
-      Safari( Some("11.5"))
+      Chrome( "4.0"),
+      Edge(   "9.0"),
+      Firefox("3.5"),
+      Opera(  "4.0"),
+      Safari( "11.5")
     )
 
   def getTag: String =

@@ -7,11 +7,11 @@ class Bdi(showWarning: Boolean)(var attributes: Attribute*)(tags: HTMLTag*)
     extends HTMLTag:
 
   val tagSupport: TagSupport = TagSupport(
-    Chrome( Some("16.0")),
-    Edge(   Some("79.0")),
-    Firefox(Some("10.0")),
-    Opera(  None),
-    Safari( Some("15.0"))
+    Chrome( "16.0"),
+    Edge(   "79.0"),
+    Firefox("10.0"),
+    Opera(  ""),
+    Safari( "15.0")
   )
 
   def getTag: String =

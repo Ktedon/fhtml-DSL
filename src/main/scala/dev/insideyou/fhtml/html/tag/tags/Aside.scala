@@ -7,11 +7,11 @@ class Aside(showWarning: Boolean)(var attributes: Attribute*)(tags: HTMLTag*)
     extends HTMLTag:
 
   val tagSupport: TagSupport = TagSupport(
-    Chrome( Some("6.0")),
-    Edge(   Some("9.0")),
-    Firefox(Some("4.0")),
-    Opera(  Some("11.1")),
-    Safari( Some("5.0"))
+    Chrome( "6.0"),
+    Edge(   "9.0"),
+    Firefox("4.0"),
+    Opera(  "11.1"),
+    Safari( "5.0")
   )
 
   def getTag: String =

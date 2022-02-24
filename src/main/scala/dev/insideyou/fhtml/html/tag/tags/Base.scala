@@ -6,12 +6,12 @@ import fhtml.attributes.*
 class Base(showWarning: Boolean)(var attributes: Attribute*) extends HTMLTag:
 
   val tagSupport: TagSupport = TagSupport(
-      Chrome( Some("All")),
-      Edge(   Some("All")),
-      Firefox(Some("All")),
-      Opera(  Some("All")),
-      Safari( Some("All"))
-    )
+    Chrome( "All"),
+    Edge(   "All"),
+    Firefox("All"),
+    Opera(  "All"),
+    Safari( "All")
+  )
 
   def getTag: String =
     s"<base ${this.attributes.map(_.getAttribute).mkString(" ")}>"

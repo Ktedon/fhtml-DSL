@@ -7,11 +7,11 @@ class Details(showWarning: Boolean)(var attributes: Attribute*)(tags: HTMLTag*)
     extends HTMLTag:
 
   val tagSupport: TagSupport = TagSupport(
-    Chrome( Some("12.0")),
-    Edge(   Some("79.0")),
-    Firefox(Some("49.0")),
-    Opera(  Some("15.0")),
-    Safari( Some("6.0"))
+    Chrome( "12.0"),
+    Edge(   "79.0"),
+    Firefox("49.0"),
+    Opera(  "15.0"),
+    Safari( "6.0")
   )
 
   def getTag: String =

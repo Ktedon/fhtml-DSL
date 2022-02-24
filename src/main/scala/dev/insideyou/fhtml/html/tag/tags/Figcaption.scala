@@ -7,11 +7,11 @@ class Figcaption(showWarning: Boolean)(var attributes: Attribute*)(tags: HTMLTag
     extends HTMLTag:
 
   val tagSupport: TagSupport = TagSupport(
-    Chrome( Some("8.0")),
-    Edge(   Some("9.0")),
-    Firefox(Some("4.0")),
-    Opera(  Some("11.0")),
-    Safari( Some("5.1"))
+    Chrome( "8.0"),
+    Edge(   "9.0"),
+    Firefox("4.0"),
+    Opera(  "11.0"),
+    Safari( "5.1")
   )
 
   def getTag: String =

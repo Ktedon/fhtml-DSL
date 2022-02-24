@@ -7,12 +7,12 @@ class A(showWarning: Boolean)(var attributes: Attribute*)(tags: HTMLTag*)
     extends HTMLTag:
 
   val tagSupport: TagSupport = TagSupport(
-      Chrome( Some("All")),
-      Edge(   Some("All")),
-      Firefox(Some("All")),
-      Opera(  Some("All")),
-      Safari( Some("All"))
-    )
+    Chrome( "All"),
+    Edge(   "All"),
+    Firefox("All"),
+    Opera(  "All"),
+    Safari( "All")
+  )
 
   def getTag: String =
     s"<a ${attributes.map(_.getAttribute).mkString(" ")}>${tags.map(_.getTag).mkString}</a>"

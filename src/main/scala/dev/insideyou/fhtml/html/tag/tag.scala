@@ -10,34 +10,29 @@ object TagUtils:
       if (attr.browserSupport.support.keys.filter(_ == tagName).nonEmpty && attr.getWarning == true)
         val browsers: (Chrome, Edge, Firefox, Opera, Safari) = attr.browserSupport.support("doctype")
         println((" "*10) ++ s"""${fansi.Color.Yellow("Earliest Google Chrome Version Support:   ") ++
-            (browsers._1.earliestVersionSupported match {
-              case Some(found) => fansi.Color.Green(s"${found}")
-              case None        => fansi.Color.Red("No Support")
-            })
+            (browsers._1.earliestVersionSupported match
+                case "" => fansi.Color.Red("No Support")
+                case o => fansi.Color.Green(o))
           }
           ${fansi.Color.Yellow("Earliest Microsoft Edge Version Support:  ") ++
-            (browsers._2.earliestVersionSupported match {
-              case Some(found) => fansi.Color.Green(s"${found}")
-              case None        => fansi.Color.Red("No Support")
-            })
+            (browsers._2.earliestVersionSupported match
+                case "" => fansi.Color.Red("No Support")
+                case o => fansi.Color.Green(o))
           }
           ${fansi.Color.Yellow("Earliest Mozilla Firefox Version Support: ") ++
-            (browsers._3.earliestVersionSupported match {
-              case Some(found) => fansi.Color.Green(s"${found}")
-              case None        => fansi.Color.Red("No Support")
-            })
+            (browsers._3.earliestVersionSupported match
+                case "" => fansi.Color.Red("No Support")
+                case o => fansi.Color.Green(o))
           }
           ${fansi.Color.Yellow("Earliest Opera Version Support:           ") ++
-            (browsers._4.earliestVersionSupported match {
-              case Some(found) => fansi.Color.Green(s"${found}")
-              case None        => fansi.Color.Red("No Support")
-            })
+            (browsers._4.earliestVersionSupported match
+                case "" => fansi.Color.Red("No Support")
+                case o => fansi.Color.Green(o))
           }
           ${fansi.Color.Yellow("Earliest Apple Safari Version Support:    ") ++
-            (browsers._5.earliestVersionSupported match {
-              case Some(found) => fansi.Color.Green(s"${found}")
-              case None        => fansi.Color.Red("No Support")
-            })
+            (browsers._5.earliestVersionSupported match
+                case "" => fansi.Color.Red("No Support")
+                case o => fansi.Color.Green(o))
           }\n""")
       else if (attr.getWarning == true)
         println(fansi.Color.Red((" "*10) ++ s"The $tagName tag does not support the \"${attr.getClass.getSimpleName}\" attribute\n"))
